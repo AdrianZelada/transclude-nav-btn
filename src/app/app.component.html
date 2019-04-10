@@ -1,0 +1,16 @@
+<div style="width: 400px">
+  <tutator-nav-btn-dropdown [navList]="navlist" [templateNav]="btn">
+  <!--<tutator-nav-btn>-->
+    <!--xxxxxx-->
+    <!--<ng-template let-data="data">-->
+      <!--asdfasdf-->
+      <!--{{data.name}}-->
+    <!--</ng-template>-->
+  <!--</tutator-nav-btn>-->
+    <ng-template let-data="data" #btn>
+      <button (click)="clicked(data)" >
+        {{data.name}}
+      </button>
+    </ng-template>
+  </tutator-nav-btn-dropdown>
+</div>
