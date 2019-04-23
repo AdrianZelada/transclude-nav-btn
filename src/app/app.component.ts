@@ -25,7 +25,16 @@ export class AppComponent {
     }
   ]
 
+  constructor(){
+
+  }
   clicked(data: any) {
     console.log(data);
+  }
+
+  add() {
+    this.navlist.push({
+      name: 'uuuu'
+    });
   }
 }

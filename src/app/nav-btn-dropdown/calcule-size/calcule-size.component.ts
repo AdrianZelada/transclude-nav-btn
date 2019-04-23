@@ -12,17 +12,15 @@ import {
 } from '@angular/core';
 
 @Component({
-  exportAs: 'tutator-nav-btn',
-  selector: 'tutator-nav-btn',
-  templateUrl: './nav-btn.component.html',
-  // styleUrls: ['./nav-btn.component.scss']
+  selector: 'calcule-size',
+  templateUrl: './calcule-size.component.html',
+  styleUrls: ['./calcule-size.component.scss']
 })
-// export class NavBtnComponent implements OnInit {
-export class NavBtnComponent implements AfterContentInit, OnDestroy{
+export class CalculeSizeComponent implements AfterContentInit, OnDestroy{
 
   isVisible: boolean = true;
   @Input() data: any = {};
-  @Input() ind: any;
+  // @Input() ind: any;
 
   @ContentChild(TemplateRef)
   @Input() layoutTemplate: TemplateRef<any>;
@@ -33,13 +31,6 @@ export class NavBtnComponent implements AfterContentInit, OnDestroy{
   @Output()
   public domChange = new EventEmitter();
 
-
-  constructor() { }
-  //
-  // ngOnInit() {
-  //
-  public location: string = 'nav';
-
   ngAfterContentInit() {
     // console.dir(this.singleNav.nativeElement)
     // console.log(this.singleNav.nativeElement.offsetWidth);
@@ -49,22 +40,31 @@ export class NavBtnComponent implements AfterContentInit, OnDestroy{
     // }, 1000);
     // console.log()
 
-    // this.changes = new MutationObserver((mutations: MutationRecord[]) => {
-    //     // mutations.forEach((mutation: MutationRecord) => this.domChange.emit(mutation));
-    //     mutations.forEach((mutation: MutationRecord) => this.domChange.emit({
-    //       data: this.data,
-    //       width: this.singleNav.nativeElement.offsetWidth,
-    //       template: this.layoutTemplate,
-    //       ind: this.ind
-    //     }));
-    //   }
-    // );
-    //
-    // this.changes.observe(this.singleNav.nativeElement , {
-    //   attributes: true,
-    //   childList: true,
-    //   characterData: true
-    // });
+    this.changes = new MutationObserver((mutations: MutationRecord[]) => {
+        // mutations.forEach((mutation: MutationRecord) => this.domChange.emit(mutation));
+
+        mutations.forEach((mutation: MutationRecord) => {
+          if (mutation.target.nodeName === '#text') {
+            console.log("mutation");
+            console.log(mutation);
+            console.log(this.data);
+            this.domChange.emit({
+              data: this.data,
+              width: this.singleNav.nativeElement.offsetWidth,
+              template: this.layoutTemplate,
+              // ind: this.ind
+            });
+          }
+        });
+      }
+    );
+
+    this.changes.observe(this.singleNav.nativeElement , {
+      attributes: true,
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
 
   }
 
@@ -86,7 +86,7 @@ export class NavBtnComponent implements AfterContentInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    // this.changes.disconnect();
+    this.changes.disconnect();
   }
 
 }
