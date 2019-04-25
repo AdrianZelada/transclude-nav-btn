@@ -1,5 +1,5 @@
 <div style="width: 400px">
-  <tutator-nav-btn-dropdown [navList]="navlist" [templateNav]="btn">
+  <tutator-nav-btn-dropdown [navList]="navlist" [templateNav]="btn" [(list)]="navlist">
   <!--<tutator-nav-btn>-->
     <!--xxxxxx-->
     <!--<ng-template let-data="data">-->
@@ -15,3 +15,6 @@
   </tutator-nav-btn-dropdown>
 </div>
 <button (click)="add()">Add</button>
+<button (click)="edit()">edit 1</button>
+<button (click)="edit2()">edit 2</button>
+<button (click)="delete()">delete</button>

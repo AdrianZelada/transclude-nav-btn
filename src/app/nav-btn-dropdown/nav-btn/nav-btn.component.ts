@@ -66,6 +66,37 @@ export class NavBtnComponent implements AfterContentInit, OnDestroy{
     //   characterData: true
     // });
 
+    // this.changes = new MutationObserver((mutations: MutationRecord[]) => {
+    //     // mutations.forEach((mutation: MutationRecord) => this.domChange.emit(mutation));
+    //
+    //     mutations.forEach((mutation: MutationRecord) => {
+    //       if (mutation.target.nodeName === '#text') {
+    //         // console.log("mutation");
+    //         // console.log(mutation);
+    //         // console.log(this.data);
+    //         // setTimeout(() => {
+    //         console.log('offsetWidth');
+    //         console.log(this.singleNav.nativeElement.offsetWidth);
+    //         this.domChange.emit({
+    //           data: this.data,
+    //           width: this.singleNav.nativeElement.offsetWidth,
+    //           template: this.layoutTemplate,
+    //           // ind: this.ind
+    //         });
+    //         // }, 100)
+    //
+    //       }
+    //     });
+    //   }
+    // );
+    //
+    // this.changes.observe(this.singleNav.nativeElement , {
+    //   attributes: true,
+    //   childList: true,
+    //   characterData: true,
+    //   subtree: true
+    // });
+
   }
 
   public getWidth() {

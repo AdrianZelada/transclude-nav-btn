@@ -4,11 +4,12 @@ import {
   ContentChildren,
   ElementRef, EmbeddedViewRef,
   Input,
-  OnInit,
+  OnInit, Output,
   QueryList,
   TemplateRef,
   ViewChild, ViewChildren,
-  ViewContainerRef
+  ViewContainerRef,
+  EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, ChangeDetectionStrategy
 } from '@angular/core';
 import {NavBtnComponent} from '../nav-btn/nav-btn.component';
 
@@ -16,25 +17,42 @@ import {NavBtnComponent} from '../nav-btn/nav-btn.component';
   exportAs: 'tutator-nav-btn-dropdown',
   selector: 'tutator-nav-btn-dropdown',
   templateUrl: './nav-btn-dropdown.component.html',
-  styleUrls: ['./nav-btn-dropdown.component.scss']
+  styleUrls: ['./nav-btn-dropdown.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavBtnDropdownComponent implements OnInit, AfterContentInit {
+export class NavBtnDropdownComponent implements OnInit, AfterContentInit, OnChanges {
 
   @ViewChild('navBtnContent') navBtnContent: ElementRef;
   @ViewChildren(NavBtnComponent) navs: QueryList<NavBtnComponent> = new QueryList();
 
-  @Input() navList: Array<any> = [];
+  // @Input() navList: Array<any> = [];
+  @Input() get navList() {
+    return this._navList;
+  }
+  set navList(res: Array<any>) {
+    console.log(res);
+    this._navList = res;
+  }
   @Input() templateNav: TemplateRef<any>;
+
+  @Input() private list: Array<any> = [];
+  @Output() public listChange: EventEmitter<Array<any>> = new EventEmitter();
+
+
   public width: number = 0;
   public containerWidth: number = 0;
   private viewRef: EmbeddedViewRef<{}>;
-  public dropdowList: Array<any> = [];
+  public btnGroupList: Array<any> = [];
+  public dropdownList: Array<any> = [];
   public dataCalcule: any = {};
+  public _navList: Array<any> = [];
 
   public index: number = 0;
   constructor(
-    private viewContainerRef: ViewContainerRef
-  ) { }
+    private viewContainerRef: ViewContainerRef,
+    private cdRef: ChangeDetectorRef,
+
+) { }
 
   ngOnInit() {
     // this.dropdowList = this.navList.length > 0 ? [
@@ -42,15 +60,27 @@ export class NavBtnDropdownComponent implements OnInit, AfterContentInit {
     //     ...this.navList[0]
     //   }
     // ] : [];
+   this.refresh();
+  }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes')
+    console.log(changes)
+    this.cdRef.detectChanges();
+  }
+
+  public refresh() {
     this.dataCalcule = this.navList.length > 0 ?
       {
         ...this.navList[0],
         ind: 0
       }
-     : {};
+      : {};
 
     this.index = 0;
+    this.dropdownList = [];
+    this.btnGroupList = [];
+    this.containerWidth = 0;
   }
 
   ngAfterContentInit() {
@@ -105,10 +135,12 @@ export class NavBtnDropdownComponent implements OnInit, AfterContentInit {
     //   viewRef.rootNodes.forEach((rootNode) => {outletElement.appendChild(rootNode)});
     // }
     //
+    console.log(data.width);
     if (this.width > this.containerWidth + data.width) {
       this.containerWidth = this.containerWidth + data.width;
-      this.dropdowList.push(data.data);
-
+      this.btnGroupList.push(data.data);
+    } else {
+      this.dropdownList.push(data.data);
     }
     this.appendToList();
 

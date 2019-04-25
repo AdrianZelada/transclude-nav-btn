@@ -6,9 +6,12 @@
       <!--<tutator-nav-btn [data]="data" [layoutTemplate]="templateNav" *ngFor="let data of navList" ></tutator-nav-btn>-->
 
 
-  <tutator-nav-btn [data]="data" [ind]="data.ind" [layoutTemplate]="templateNav" *ngFor="let data of dropdowList;" ></tutator-nav-btn>
+  <tutator-nav-btn [data]="data" [ind]="data.ind" [layoutTemplate]="templateNav" *ngFor="let data of btnGroupList;" ></tutator-nav-btn>
+  <button class="more-options" *ngIf="dropdownList.length > 0"> ... </button>
   <!--<calcule-size (domChange)="domChange($event)" [data]="data" [ind]="ind" [layoutTemplate]="templateNav" *ngFor="let data of navList; let ind = index" ></calcule-size>-->
-
+</div>
+<div *ngFor="let obj of navList">
+  {{obj.name}}
 </div>
 <calcule-size (domChange)="domChange($event)" [data]="dataCalcule" [layoutTemplate]="templateNav"></calcule-size>
 
