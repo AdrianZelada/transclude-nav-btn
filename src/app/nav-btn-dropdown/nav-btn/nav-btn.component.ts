@@ -15,7 +15,7 @@ import {
   exportAs: 'tutator-nav-btn',
   selector: 'tutator-nav-btn',
   templateUrl: './nav-btn.component.html',
-  // styleUrls: ['./nav-btn.component.scss']
+  styleUrls: ['./nav-btn.component.scss']
 })
 // export class NavBtnComponent implements OnInit {
 export class NavBtnComponent implements AfterContentInit, OnDestroy{
@@ -65,7 +65,7 @@ export class NavBtnComponent implements AfterContentInit, OnDestroy{
     //   childList: true,
     //   characterData: true
     // });
-
+    //
     // this.changes = new MutationObserver((mutations: MutationRecord[]) => {
     //     // mutations.forEach((mutation: MutationRecord) => this.domChange.emit(mutation));
     //

@@ -60,7 +60,7 @@ export class NavBtnDropdownComponent implements OnInit, AfterContentInit, OnChan
     //     ...this.navList[0]
     //   }
     // ] : [];
-   this.refresh();
+    this.refresh();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -87,7 +87,7 @@ export class NavBtnDropdownComponent implements OnInit, AfterContentInit, OnChan
     console.log(this.templateNav);
     this.width = this.navBtnContent.nativeElement.clientWidth;
     console.log(this.width);
-    console.log(this.navBtnContent.nativeElement);
+    console.dir(this.navBtnContent.nativeElement);
     // setTimeout(() => {
     //   console.log(this.navs)
     //   let sumWidth = 0;
@@ -113,7 +113,10 @@ export class NavBtnDropdownComponent implements OnInit, AfterContentInit, OnChan
     //
     //   });
     // }, 100);
+  }
 
+  getWith() {
+    return this.navBtnContent.nativeElement.clientWidth
   }
 
   domChange(data: any) {
@@ -135,9 +138,19 @@ export class NavBtnDropdownComponent implements OnInit, AfterContentInit, OnChan
     //   viewRef.rootNodes.forEach((rootNode) => {outletElement.appendChild(rootNode)});
     // }
     //
-    console.log(data.width);
+
+    this.width = this.getWith();
+    console.log("this.width");
+
+    console.log(this.width);
+    console.log("data.width");
     if (this.width > this.containerWidth + data.width) {
+
+      console.log(data.width);
       this.containerWidth = this.containerWidth + data.width;
+      console.log(this.containerWidth);
+
+      console.log("this.containerWidth");
       this.btnGroupList.push(data.data);
     } else {
       this.dropdownList.push(data.data);

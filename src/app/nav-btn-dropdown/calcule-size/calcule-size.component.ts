@@ -42,8 +42,9 @@ export class CalculeSizeComponent implements AfterContentInit, OnDestroy{
 
     this.changes = new MutationObserver((mutations: MutationRecord[]) => {
         // mutations.forEach((mutation: MutationRecord) => this.domChange.emit(mutation));
-
+      console.log(mutations)
         mutations.forEach((mutation: MutationRecord) => {
+
           if (mutation.target.nodeName === '#text') {
             // console.log("mutation");
             // console.log(mutation);

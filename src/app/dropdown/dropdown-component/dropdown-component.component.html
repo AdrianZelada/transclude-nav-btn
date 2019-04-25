@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center">
+  <div #navBtnContent class="w-100">
+    <tp3-dropdown-btn-component [data]="data" [layoutTemplate]="templateNav" *ngFor="let data of navList;let i=index"
+      [i]="i">
+    </tp3-dropdown-btn-component>
+  </div>
+  <div class="menu-item pl-1">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      <i class="mdi mdi-dots-horizontal"></i>
+    </button>
+    <div id="dropdown" class="drop-menu dropdown-menu" aria-labelledby="dropdownMenuButton">
+    </div>
+  </div>
+</div>

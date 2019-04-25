@@ -24,7 +24,9 @@ export class AppComponent implements AfterContentInit{
     {
       name:'yyyyyyyssssjjsjsjsjsjjsjsjsjs'
     }
-  ]
+  ];
+
+  width: string = '400px'
 
   @ViewChild(NavBtnDropdownComponent) nav: NavBtnDropdownComponent;
 
@@ -41,7 +43,7 @@ export class AppComponent implements AfterContentInit{
 
   add() {
     this.navlist.push({
-      name: 'uuuu'
+      name: Date.now()
     });
     this.nav.refresh();
 
@@ -74,5 +76,22 @@ export class AppComponent implements AfterContentInit{
     this.navlist = this.navlist.filter((data) => {
       return data.name !== 'adrian';
     });
+    this.nav.refresh();
+  }
+
+
+  changesSize() {
+
+    this.width = this.width === '400px' ? '1000px' : '400px';
+    this.nav.refresh();
+  }
+
+  addtp3() {
+    // this.navlist.push({
+    //   name: Date.now()
+    // })
+
+    this.navlist = [...this.navlist, {name: Date.now()}]
+
   }
 }
